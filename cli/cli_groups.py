@@ -2,6 +2,7 @@ import click
 from cli.commands import cli_users_commands as usr
 from cli.commands import cli_todos_commands as tds
 from cli.commands import cli_comments_commands as cms
+from cli.commands import cli_posts_commands as pst
 
 
 @click.group()
@@ -53,6 +54,10 @@ def posts():
         \nEndpoint: '/posts'
     """
     pass
+
+
+posts.add_command(pst.get_list)
+posts.add_command(pst.get_detail)
 
 
 @cli.group()
