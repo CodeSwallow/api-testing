@@ -124,6 +124,9 @@ class TestRealUserAPIMatch(unittest.TestCase):
 
 
 class TestUserService(unittest.TestCase):
+    """
+        Mock tests for UserService
+    """
 
     @classmethod
     def setUpClass(cls):

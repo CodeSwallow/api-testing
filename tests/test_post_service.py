@@ -10,6 +10,9 @@ PK = 100  # for testing real API, could return 404
 
 
 class TestRealPostAPIMatch(unittest.TestCase):
+    """
+        Test calls to real API, useful for comparing response keys to mock keys
+    """
 
     @classmethod
     def setUpClass(cls):
@@ -42,6 +45,9 @@ class TestRealPostAPIMatch(unittest.TestCase):
 
 
 class TestPostService(unittest.TestCase):
+    """
+        Mock tests for TodoService
+    """
 
     @classmethod
     def setUpClass(cls):
