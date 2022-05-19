@@ -1,10 +1,12 @@
 import requests
+from decouple import config
 
 
 class BaseService:
     BASE_URL = 'https://gorest.co.in/public/v2'
+    TOKEN = config('AUTHORIZATION')
     HEADERS = {
-        'Authorization': 'Bearer 09b502827908bd7b2fa5ddb1ebe820dfc511c6a2043b50632bacb79ffc902aa6'
+        'Authorization': TOKEN
     }
 
     def get_list(self, query_params=None):
