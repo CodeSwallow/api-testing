@@ -1,5 +1,6 @@
 import click
 from cli.commands import cli_users_commands as usr
+from cli.commands import cli_todos_commands as tds
 
 
 @click.group()
@@ -38,6 +39,10 @@ def todos():
         \nEndpoint: '/todos'
     """
     pass
+
+
+todos.add_command(tds.get_list)
+todos.add_command(tds.get_detail)
 
 
 @cli.group()
