@@ -10,7 +10,7 @@ from services.comment_service import CommentService
 @click.option('--body', default=None, help='filter by body text')
 def get_list(page, post_id, name, email, body):
     """
-        Call comments api to retrieve list of todos with optional query params
+        Call comments api to retrieve list of posts with optional query params
     """
     filters = {'page': page}
     if post_id is not None:
