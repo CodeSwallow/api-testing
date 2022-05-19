@@ -112,4 +112,13 @@ python -m unittest discover -s tests
 ```
 
 The test mostly use the Mock class and patch() function from the unittest.mock library <br>
-To try to ensure that the mock requests represented real data from the actual API, tests that made calls to the real API were written to compare the keys returned to the keys used in the mock tests. 
+To try to ensure that the mock requests represented real data from the actual API, tests that made calls to the real API were written to compare the keys returned to the keys used in the mock tests. <br>
+##### To test individual an individual service:
+```
+python -m unittest tests.test_post_service
+```
+Test files: <br>
+1. test_comment_service.py
+2. test_post_service.py
+3. test_todo_service.py
+4. test_user_service.py
