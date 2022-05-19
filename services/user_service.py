@@ -46,7 +46,7 @@ class UserService(base_service.BaseService):
         return resp
 
     def post_posts(self, data, pk=None):
-        url = self.BASE_URL + f'/{pk}/todos'
+        url = self.BASE_URL + f'/{pk}/posts'
         resp = requests.post(url, data=data, headers=self.HEADERS)
         if resp.status_code == 201:
             pass  # Perform Service
