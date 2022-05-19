@@ -9,11 +9,15 @@ USERS = [
     {"id": 3102, "name": "Bala Pilla VM", "email": "vm_pilla_bala@pouros.net", "gender": "female",
      "status": "inactive"},
 ]
-PK_1 = 2525  # for testing real API, might return empty string and fail test_real_get_posts_api_keys_match
+PK_1 = 9312  # for testing real API, might return empty string and fail test_real_get_posts_api_keys_match
 PK_2 = 2500  # for testing real API, might return empty string and fail test_real_get_todos_api_keys_match
 
 
 class TestRealUserAPIMatch(unittest.TestCase):
+    """
+        Test calls to real API, useful for comparing keys but will often fail due to
+        changes in users ids.
+    """
 
     @classmethod
     def setUpClass(cls):
@@ -48,6 +52,8 @@ class TestRealUserAPIMatch(unittest.TestCase):
     def test_real_get_todos_api_keys_match(self):
         resp = self.api.get_todos(pk=PK_2)
         self.assertEqual(resp.status_code, 200)
+        if len(resp.json()) == 0:
+            self.fail(msg='No user found for this PK')
         actual_keys = resp.json().pop().keys()
 
         with patch('services.user_service.UserService.get_todos') as mock_get:
@@ -68,6 +74,8 @@ class TestRealUserAPIMatch(unittest.TestCase):
     def test_real_get_posts_api_keys_match(self):
         resp = self.api.get_posts(pk=PK_1)
         self.assertEqual(resp.status_code, 200)
+        if len(resp.json()) == 0:
+            self.fail(msg='No user found for this PK')
         actual_keys = resp.json().pop().keys()
 
         with patch('services.user_service.UserService.get_posts') as mock_get:
@@ -83,6 +91,36 @@ class TestRealUserAPIMatch(unittest.TestCase):
             mocked_keys = mocked.json().pop().keys()
 
         self.assertListEqual(list(actual_keys), list(mocked_keys))
+
+    def test_can_reach_post_on_real_api(self):
+        resp = self.api.post({
+            "name": "User 1",
+            "email": "user@gmail.com",
+            "gender": "female",
+            "status": "active"
+        })
+        self.assertTrue(resp.status_code == 201 or resp.status_code == 422)
+
+    def test_can_reach_put_on_real_api(self):
+        resp = self.api.put({
+            "name": "User 1",
+            "email": "user@gmail.com",
+            "gender": "female",
+            "status": "active"
+        }, pk=PK_1)
+        self.assertTrue(resp.status_code == 200, msg='User with this id might not exist anymore')
+
+    def test_can_reach_patch_on_real_api(self):
+        resp = self.api.patch({
+            "name": "User 1",
+            "email": "user@gmail.com",
+            "gender": "female"
+        }, pk=PK_1)
+        self.assertTrue(resp.status_code == 200, msg='User with this id might not exist anymore')
+
+    def test_can_reach_delete_on_real_api(self):
+        resp = self.api.delete(pk=PK_1)
+        self.assertTrue(resp.status_code == 204, msg='User with this id might not exist anymore')
 
 
 class TestUserService(unittest.TestCase):
