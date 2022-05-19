@@ -1,0 +1,58 @@
+import click
+from cli.commands import cli_users_commands as usr
+
+
+@click.group()
+def cli():
+    """
+        CLI app for making calls to endpoints at https://gorest.co.in/
+    """
+    pass
+
+
+@cli.group()
+def users():
+    """
+        CLI app for making calls to endpoints at https://gorest.co.in/
+        \nEndpoint: '/users'
+    """
+    pass
+
+
+users.add_command(usr.get_list)
+users.add_command(usr.get_detail)
+users.add_command(usr.post)
+users.add_command(usr.put)
+users.add_command(usr.patch)
+users.add_command(usr.delete)
+users.add_command(usr.get_posts)
+users.add_command(usr.get_todos)
+users.add_command(usr.create_post)
+users.add_command(usr.create_todo)
+
+
+@cli.group()
+def todos():
+    """
+        CLI app for making calls to endpoints at https://gorest.co.in/
+        \nEndpoint: '/todos'
+    """
+    pass
+
+
+@cli.group()
+def posts():
+    """
+        CLI app for making calls to endpoints at https://gorest.co.in/
+        \nEndpoint: '/posts'
+    """
+    pass
+
+
+@cli.group()
+def comments():
+    """
+        CLI app for making calls to endpoints at https://gorest.co.in/
+        \nEndpoint: '/comments'
+    """
+    pass
