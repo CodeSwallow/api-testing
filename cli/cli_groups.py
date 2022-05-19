@@ -58,6 +58,8 @@ def posts():
 
 posts.add_command(pst.get_list)
 posts.add_command(pst.get_detail)
+posts.add_command(pst.get_comments)
+posts.add_command(pst.post_comments)
 
 
 @cli.group()

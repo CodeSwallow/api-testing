@@ -1,4 +1,5 @@
 import click
+from cli.utilities.utilities import CheckInputs
 from services.post_service import PostService
 
 
@@ -47,5 +48,54 @@ def get_detail(primary_key):
             click.echo(f"Could not find post with id: {primary_key}")
         else:
             click.echo(f"Error: {resp.status_code}")
+    except ValueError:
+        click.echo(f"Primary Key must be an integer")
+
+
+@click.command()
+@click.argument('primary_key')
+def get_comments(primary_key):
+    """
+        View comments of existing post by passing its id (PRIMARY_KEY)
+    """
+    click.echo("Getting post's comments...")
+    try:
+        pk = int(primary_key)
+        api = PostService()
+        resp = api.get_comments(pk=pk)
+        if resp.status_code == 200:
+            if len(resp.json()) == 0:
+                click.echo('Empty')
+            for comment in resp.json():
+                click.echo(comment)
+        else:
+            click.echo(f"Error: {resp.status_code}")
+    except ValueError:
+        click.echo(f"Primary Key must be an integer")
+
+
+@click.command()
+@click.argument('primary_key')
+@click.argument('name')
+@click.argument('email')
+@click.argument('body')
+def post_comments(primary_key, name, email, body):
+    """
+        Create comment for existing post by passing its id and required arguments for new comment
+    """
+    click.echo("Creating comment for post...")
+    try:
+        pk = int(primary_key)
+        api = PostService()
+        new_comment = {'name': name, 'body': body}
+        if not CheckInputs.check_email(email):
+            click.echo('Invalid mail')
+            return
+        new_comment['email'] = email
+        resp = api.post_comments(new_comment, pk=pk)
+        if resp.status_code == 201:
+            click.echo(f"Comment created: {resp.json()}")
+        else:
+            click.echo(f"Error: {resp.status_code}, {resp.json()}")
     except ValueError:
         click.echo(f"Primary Key must be an integer")
