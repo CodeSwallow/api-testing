@@ -37,7 +37,7 @@ def get_list(page, user_id, title, due_on, status):
 @click.argument('primary_key')
 def get_detail(primary_key):
     """
-        Call comments api to retrieve todo detail with id (PRIMARY_KEY) given
+        Call todos api to retrieve todo detail with id (PRIMARY_KEY) given
     """
     click.echo("Todo details...")
     try:
