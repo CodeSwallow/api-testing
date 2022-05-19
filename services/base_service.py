@@ -24,7 +24,6 @@ class BaseService:
         if pk is not None:
             url += f'/{pk}'
         resp = requests.get(url, headers=self.HEADERS)
-        print(resp)
         if resp.status_code == 200:
             pass  # Perform Service
         return resp
