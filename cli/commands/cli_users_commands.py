@@ -184,7 +184,10 @@ def get_todos(primary_key):
 
 @click.command()
 @click.argument('primary_key')
-def create_todo(primary_key):
+@click.argument('title')
+@click.argument('due_on', type=click.DateTime())
+@click.argument('status', type=click.Choice(['pending', 'completed']))
+def create_todo(primary_key, title, due_on, status):
     """
         Create todo for existing user by passing its id and required arguments for new todo
     """
@@ -192,6 +195,12 @@ def create_todo(primary_key):
     try:
         pk = int(primary_key)
         api = UserService()
+        new_todo = {'title': title, 'due_on': due_on, 'status': status}
+        resp = api.post_todos(new_todo, pk=pk)
+        if resp.status_code == 201:
+            click.echo(f"Todo created: {resp.json()}")
+        else:
+            click.echo(f"Error: {resp.status_code}, {resp.json()}")
     except ValueError:
         click.echo(f"Primary Key must be an integer")
 
@@ -220,7 +229,9 @@ def get_posts(primary_key):
 
 @click.command()
 @click.argument('primary_key')
-def create_post(primary_key):
+@click.argument('title')
+@click.argument('body')
+def create_post(primary_key, title, body):
     """
         Create post for existing user by passing its id and required arguments for new todo
     """
@@ -228,5 +239,11 @@ def create_post(primary_key):
     try:
         pk = int(primary_key)
         api = UserService()
+        new_todo = {'title': title, 'body': body}
+        resp = api.post_posts(new_todo, pk=pk)
+        if resp.status_code == 201:
+            click.echo(f"Post created: {resp.json()}")
+        else:
+            click.echo(f"Error: {resp.status_code}, {resp.json()}")
     except ValueError:
         click.echo(f"Primary Key must be an integer")
