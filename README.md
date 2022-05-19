@@ -112,4 +112,4 @@ python -m unittest discover -s tests
 ```
 
 The test mostly use the Mock class and patch() function from the unittest.mock library <br>
-To try to ensure that the mock requests represented real data from the actual API, tests were written that made calls to the real API to compare the keys returned to the keys used in the mock tests. 
+To try to ensure that the mock requests represented real data from the actual API, tests that made calls to the real API were written to compare the keys returned to the keys used in the mock tests. 
