@@ -8,7 +8,8 @@ from cli.commands import cli_posts_commands as pst
 @click.group()
 def cli():
     """
-        CLI app for making calls to endpoints at https://gorest.co.in/
+        CLI app for making calls to endpoints at
+        https://gorest.co.in/
     """
     pass
 
@@ -16,8 +17,7 @@ def cli():
 @cli.group()
 def users():
     """
-        CLI app for making calls to endpoints at https://gorest.co.in/
-        \nEndpoint: '/users'
+        Endpoint: '/users'
     """
     pass
 
@@ -37,8 +37,7 @@ users.add_command(usr.create_todo)
 @cli.group()
 def todos():
     """
-        CLI app for making calls to endpoints at https://gorest.co.in/
-        \nEndpoint: '/todos'
+        Endpoint: '/todos'
     """
     pass
 
@@ -50,8 +49,7 @@ todos.add_command(tds.get_detail)
 @cli.group()
 def posts():
     """
-        CLI app for making calls to endpoints at https://gorest.co.in/
-        \nEndpoint: '/posts'
+        Endpoint: '/posts'
     """
     pass
 
@@ -65,8 +63,7 @@ posts.add_command(pst.post_comments)
 @cli.group()
 def comments():
     """
-        CLI app for making calls to endpoints at https://gorest.co.in/
-        \nEndpoint: '/comments'
+        Endpoint: '/comments'
     """
     pass
 
