@@ -1,6 +1,7 @@
 import click
 from cli.commands import cli_users_commands as usr
 from cli.commands import cli_todos_commands as tds
+from cli.commands import cli_comments_commands as cms
 
 
 @click.group()
@@ -61,3 +62,7 @@ def comments():
         \nEndpoint: '/comments'
     """
     pass
+
+
+comments.add_command(cms.get_list)
+comments.add_command(cms.get_detail)
