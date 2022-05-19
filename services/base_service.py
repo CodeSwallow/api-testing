@@ -3,6 +3,10 @@ from decouple import config
 
 
 class BaseService:
+    """
+        Base service for making get requests (with or without primary key)
+    """
+
     BASE_URL = 'https://gorest.co.in/public/v2'
     TOKEN = config('AUTHORIZATION')
     HEADERS = {

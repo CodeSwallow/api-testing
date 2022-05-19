@@ -3,6 +3,10 @@ from services import base_service
 
 
 class UserService(base_service.BaseService):
+    """
+        Service to make API calls to /users endpoint.
+        Added functionality could be added on successful response
+    """
 
     def __init__(self):
         self.BASE_URL += '/users'
